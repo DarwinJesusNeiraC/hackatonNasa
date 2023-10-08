@@ -3,7 +3,7 @@ from .forms import NewUserForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from .models import InformacionAdicionalUsuario
+from .models import InformacionAdicionalUsuario, MultimediaUsuario
 
 def home(request):
     return render(request, "home.html")
@@ -16,6 +16,10 @@ def register_request(request):
 
             # Crear la instancia de InformacionAdicionalUsuario asociada al usuario
             InformacionAdicionalUsuario.objects.create(user=user)
+
+            # Crear la instancia de MultimediaUsuario asociada al usuario
+            multimedia_usuario = MultimediaUsuario(user=user)
+            multimedia_usuario.save()
 
             login(request, user)
             messages.success(request, "Registration successful." )

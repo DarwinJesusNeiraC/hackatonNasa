@@ -7,3 +7,10 @@ class InformacionAdicionalUsuario(models.Model):
 
     def __str__(self):
         return f'Descripcion adicional de {self.user.username}'
+
+class MultimediaUsuario(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    imagenPerfil = models.ImageField(upload_to='perfil/', null=True, blank=True, default='perfil/default.png')
+
+    def __str__(self):
+        return f'Multimedia de {self.user.username}'
