@@ -4,9 +4,6 @@ from django.contrib.auth.models import User
 class Animal(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    #def __str__(self):
-    #   return self.nombre
-
 class InfoAnimal(models.Model):
     animal = models.OneToOneField(Animal, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=100)
@@ -25,9 +22,19 @@ class Especie(models.Model):
     descripcion = models.TextField()
 
 class Habitat(models.Model):
-    infoAnimal = models.OneToOneField(InfoAnimal, on_delete=models.CASCADE)
+    animal = models.OneToOneField(Animal, on_delete=models.CASCADE)
+    #infoAnimal = models.OneToOneField(InfoAnimal, on_delete=models.CASCADE)
     descripcion = models.TextField()
 
+class MultimediaAnimal(models.Model):
+    animal = models.OneToOneField(Animal, on_delete=models.CASCADE)
+    videos = models.TextField()
+    modeloAr = models.CharField(max_length=200)
+    icono = models.ImageField(upload_to='iconos/', null=True, blank=True)
+    imagen = models.ImageField(upload_to='fotos/', null=True, blank=True)
+
 class Coordenadas(models.Model):
-    infoAnimal = models.ForeignKey(InfoAnimal, on_delete=models.CASCADE)
-    coordenada = models.CharField(max_length=100)
+    animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
+    #infoAnimal = models.ForeignKey(InfoAnimal, on_delete=models.CASCADE)
+    latitud = models.FloatField()
+    longitud = models.FloatField()
