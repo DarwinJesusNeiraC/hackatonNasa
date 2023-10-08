@@ -3,7 +3,9 @@ from .forms import NewUserForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
+from django.http import Http404
 from .models import InformacionAdicionalUsuario, MultimediaUsuario
+from django.contrib.auth.models import User
 
 def home(request):
     return render(request, "home.html")
@@ -50,3 +52,19 @@ def logout_request(request):
     logout(request)
     messages.info(request, "You have successfully logged out.") 
     return redirect("homepage")    
+
+def show_user_info(request, username):
+    try:
+        usuario = User.objects.get(username=username)
+        info_adicional = InformacionAdicionalUsuario.objects.get(user=usuario)
+        multimedia = MultimediaUsuario.objects.get(user=usuario)
+    except User.DoesNotExist:
+        raise Http404("Usuario no encontrado")
+
+    context = {
+        'usuario': usuario,
+        'puntuacion': info_adicional.puntuacion,
+        'imagen': multimedia.imagenPerfil
+    }
+
+    return render(request, "show_user_info.html", context)
