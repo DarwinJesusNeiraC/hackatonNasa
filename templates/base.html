@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mi sitio web</title>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<ul>
+					<li><a href="/">Inicio</a></li>
+					<li><a href="/acerca/">Acerca de</a></li>
+					<li><a href="/contacto/">Contacto</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		{% block content %}
+		<!-- Este bloque será reemplazado por cada página que extienda esta plantilla -->
+		{% endblock %}
+
+		<footer>
+			<!-- Aquí va tu código de pie de página -->
+		</footer>
+	</body>
+</html>
