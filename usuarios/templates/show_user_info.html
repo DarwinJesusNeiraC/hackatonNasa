@@ -1,9 +1,80 @@
 {% extends "base.html" %}
+{% block content %}
+<div class="container py-5">
+	<div class="row justify-content-center">
+		<div class="col-md-10">
+			<div class="card">
+				<div class="card-body">
+					<!-- Mostrar mensajes -->
+					{% if messages %}
+					<div class="alert alert-danger">
+						<ul class="mb-0">
+							{% for message in messages %}
+							<li>{{ message }}</li>
+							{% endfor %}
+						</ul>
+					</div>
+					{% endif %}
 
-{% block content %} 
+					<h1 class="text-center mb-4">User Information</h1>
 
-{{ usuario }}
-{{ puntuacion }}
-<a href="{{ imagen.url }}">Imagen</a>
+					<!-- Información del usuario -->
+					<div class="row">
+						<!-- Sección izquierda para la imagen -->
+						<div class="col-md-4 text-center">
+							<div class="mb-3">
+								<img src="{{ imagen.url }}" alt="Profile Image" class="img-fluid rounded-circle" style="max-width: 200px;">
+							</div>
+						</div>
 
+						<!-- Sección derecha para la información -->
+						<div class="col-md-8">
+							<div class="mb-3">
+								<p class="lead"><strong>Username:</strong> {{ usuario.username }}</p>
+							</div>
+							<div class="mb-3">
+								<p class="lead"><strong>Email:</strong> {{ usuario.email }}</p>
+							</div>
+							<div class="mb-3">
+								<p class="lead"><strong>Full Name:</strong> {{ usuario.first_name }} {{ usuario.last_name }}</p>
+							</div>
+							<div class="mb-3">
+								<p class="lead"><strong>Rating:</strong> {{ puntuacion }}</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- Información de los animales-->
+					<div class="card-body col-md-4">
+						{% for animal_info in animal %}
+						<div class="card mb-3">
+							<div class="card-body justify-content-center align-items-stretch"> <!-- Cambio a align-items-stretch -->
+								<!-- Sección izquierda para la imagen y botón -->
+								<div>
+									<h5 class="card-title">{{ animal_info.informacion.nombre }}</h5>
+									<!--p class="card-text">{{ animal_info.informacion.nombreCientifico }}</p>
+										<p class="card-text">Descripción: {{ animal_info.informacion.descripcion }}</p>
+										<p class="card-text">Última Modificación: {{ animal_info.informacion.ultimaModificacion }}</p-->
+								</div>
+
+								<!-- Sección derecha para la información -->
+								<div class="mr-3">
+									{% if animal_info.multimedia %}
+									<div class="mb-3">
+										<img src="{{ animal_info.multimedia.imagen.url }}" alt="Animal" class="img-fluid" style="max-width: 200px;">
+									</div>
+									<div class="mb-3">
+										<a class="btn btn-primary" href="{{ animal_info.multimedia.modeloAr }}">Ver modelo</a>
+									</div>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}

@@ -21,8 +21,8 @@
 					<div class="collapse navbar-collapse" id="navbarCollapse">
 						<div class="navbar-nav">
 							<a href="/" class="nav-item nav-link active">Inicio</a>
-							<a href="/acerca/" class="nav-item nav-link">Acerca de</a>
-							<a href="/contacto/" class="nav-item nav-link">Contacto</a>
+							<a href="#" class="nav-item nav-link">Acerca de</a>
+							<a href="#" class="nav-item nav-link">Contacto</a>
 						</div>
 						<div class="navbar-nav ms-auto">
 							{% if not user.is_authenticated %}
@@ -37,9 +37,9 @@
 			</nav>
 		</div>
 
-		<div class="container">
-					{% block content %}
-					{% endblock %}
+		<div class="container" style='margin-top: 20px; margin-bottom: 20px'>
+			{% block content %}
+			{% endblock %}
 		</div>
 
 		<footer class="bg-primary text-white text-center text-lg-start">

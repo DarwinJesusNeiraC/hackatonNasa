@@ -1,24 +1,55 @@
 {% extends "base.html" %}
+{% block content %}
+<div class="container py-5">
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-body">
+					<h1 class="text-center mb-4">Login</h1>
 
-{% block content %} 
+					<!-- Mostrar mensajes -->
+					{% if messages %}
+					<div class="alert alert-danger">
+						<ul class="mb-0">
+							{% for message in messages %}
+							<li>{{ message }}</li>
+							{% endfor %}
+						</ul>
+					</div>
+					{% endif %}
 
-<h2>Login</h2>
+					<!-- Formulario de login -->
+					<form method="post">
+						{% csrf_token %}
+						{% load crispy_forms_tags %}  <!-- Load crispy_forms_tags -->
 
-<!-- Mostrar mensajes -->
-{% if messages %}
-<ul class="messages">
-	{% for message in messages %}
-	<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-	{% endfor %}
-</ul>
-{% endif %}
+						<!-- Campo de nombre de usuario -->
+						<div class="mb-3">
+							{{ form.username.label_tag }} <input type="text" name="{{ form.username.html_name }}" class="form-control">
+						</div>
 
-<!-- Formulario de login -->
-<form method="post">
-	{% csrf_token %}
-	{{ form.username.label_tag }} {{ form.username }}
-	{{ form.password.label_tag }} {{ form.password }}
-	<button type="submit">Login</button>
-</form>
+						<!-- Campo de contraseña -->
+						<div class="mb-3">
+							{{ form.password.label_tag }} <input type="password" name="{{ form.password.html_name }}" class="form-control">
+							{% for error in form.password.errors %}
+							<small class="text-danger">{{ error }}</small>
+							{% endfor %}
+						</div>
 
+						<button class="btn btn-primary" type="submit">Login</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+			return new bootstrap.Tooltip(tooltipTriggerEl);
+		});
+	});
+</script>
 {% endblock %}

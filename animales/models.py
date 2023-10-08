@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Animal(models.Model):
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class InfoAnimal(models.Model):
     animal = models.OneToOneField(Animal, on_delete=models.CASCADE)
