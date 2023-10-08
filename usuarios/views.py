@@ -3,6 +3,7 @@ from .forms import NewUserForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
+from .models import InformacionAdicionalUsuario
 
 def home(request):
     return render(request, "home.html")
@@ -12,6 +13,10 @@ def register_request(request):
         form = NewUserForm(request.POST)
         if form.is_valid():
             user = form.save()
+
+            # Crear la instancia de InformacionAdicionalUsuario asociada al usuario
+            InformacionAdicionalUsuario.objects.create(user=user)
+
             login(request, user)
             messages.success(request, "Registration successful." )
             return redirect("homepage")
