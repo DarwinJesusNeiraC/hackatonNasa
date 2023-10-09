@@ -102,7 +102,7 @@ def mapa(request):
                     "imagen": f"{base_url}{multimedia.imagen}" if multimedia.imagen else '',
                     }
 
-        # Creamos la estructura de datos que necesitas
+            # Creamos la estructura de datos que necesitas
         coordenadas_info[index] = {
                 "latitud": coordenada.latitud,
                 "longitud": coordenada.longitud,
@@ -118,7 +118,7 @@ def mapa(request):
                 "usuario": usuario
                 }
 
-    context = {
-            "coordenadas": coordenadas_info
-            }
-    return render(request, "mapa.html", context)
+        context = {
+                "coordenadas": coordenadas_info
+                }
+        return render(request, "mapa.html", context)
