@@ -1,0 +1,72 @@
+/* Estilo del botón que abre el modal */
+#myBtn {
+    margin: 20px;
+}
+
+/* Estilo del botón de cierre */
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Animación para el modal */
+.modal.slide-from-bottom .modal-dialog {
+    transform: translateY(100%);
+    transition: transform 0.4s ease-in-out;
+}
+
+.modal.show .modal-dialog {
+    transform: translateY(0%);
+}
+
+/* Estilo para el mapa */
+#map {
+    height: 300px;
+}
+
+/* Estilo para la barra vertical */
+.vertical-bar {
+    width: 6px;
+    background-color: #aaa;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+}
+
+/* Clase para el scroll personalizado */
+.modal-body-scroll {
+    max-height: 300px; /* Altura máxima del contenido */
+    overflow-y: auto;
+}
+
+/* Estilo para las estrellas de calificación */
+.rating {
+    display: inline-block;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    font-size: 30px;
+    color: #ddd;
+    cursor: pointer;
+}
+
+.rating label:hover,
+.rating label:hover ~ label,
+.rating input:checked ~ label {
+    color: #FFD700; /* Amarillo más intenso */
+}
+
